@@ -61,13 +61,5 @@
             </a>
         </div>
 
-        {{-- Back button --}}
-        <div class="mt-6 text-right">
-            <a href="{{ route('certificate.index') }}"
-               class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">
-               ← Back to list
-            </a>
-        </div>
-
     </div>
 </x-layout>
