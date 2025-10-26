@@ -79,13 +79,14 @@ DROP TABLE IF EXISTS `certificates`;
 CREATE TABLE `certificates` (
   `id` int NOT NULL,
   `name` varchar(128) DEFAULT NULL,
-  `role` smallint DEFAULT NULL,
-  `category` smallint DEFAULT NULL,
+  `role_id` smallint DEFAULT NULL,
+  `category_id` smallint DEFAULT NULL,
   `link` varchar(200) DEFAULT NULL,
-  `userscol` varchar(45) DEFAULT NULL,
-  `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` smallint DEFAULT NULL,
+  `photo` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` smallint DEFAULT 1,
+  `description` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

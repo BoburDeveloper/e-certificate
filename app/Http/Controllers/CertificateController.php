@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
+
     public function index()
     {
         $certificates = Certificate::latest()->get();
@@ -23,8 +29,9 @@ class CertificateController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'id' => 'required|integer',
-            'role' => 'required|integer',
-            'category' => 'required|integer',
+            'role_id' => 'required|integer',
+            'category_id' => 'required|integer',
+            'description' => 'required|string|max:2048',
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -48,9 +55,11 @@ class CertificateController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'id' => 'required|integer',
-            'role' => 'required|integer',
-            'category' => 'required|integer',
+            'role_id' => 'required|integer',
+            'category_id' => 'required|integer',
+            'description' => 'required|string|max:2048',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'status'=>'nullable|integer',
         ]);
         if ($request->hasFile('photo')) {
             $validated['photo'] = $request->file('photo')->store('certificates', 'public');
@@ -65,18 +74,19 @@ class CertificateController extends Controller
 
     public function destroy(Certificate $certificate)
     {
-        
+
         unlink(storage_path('app/public/'.$certificate->photo));
         $certificate->delete();
         return redirect()->route('certificate.index')->with('success', 'Certificate deleted successfully!');
     }
 
     public function show(Certificate $certificate){
+        $certificate->load('role');
         return view('certificate.show', compact('certificate'));
     }
 
     public function view($link){
-        $certificate = Certificate::where('link', $link)->first();
+        $certificate = Certificate::with('role')->where('link', $link)->first();
                 return view('certificate.view', compact('certificate'));
     }
 }

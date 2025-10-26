@@ -1,1 +1,1 @@
-@include('certificate.show')
+    @include('certificate.show')
