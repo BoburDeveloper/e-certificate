@@ -10,5 +10,7 @@
     <div class="container mx-auto px-4 py-6">
         {{ $slot }}
     </div>
+
+<script type="text/javascript" src="{{asset('js/site.js')}}"></script>
 </body>
 </html>

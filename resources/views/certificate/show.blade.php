@@ -1,107 +1,97 @@
-<x-layout title="Certificate Details">
-    <div class="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden mt-10 border border-gray-100">
-        {{-- Header --}}
-        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-4">
-            <h1 class="text-2xl font-bold text-white">🎓 Certificate Information</h1>
-        </div>
+<x-layout title="Certificate of Achievement">
+    <button type="button" onclick="printDiv('document-card')"
+            class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
+        PDF
+    </button>
 
-        <div class="p-8 space-y-6">
-            {{-- Photo --}}
-            @if ($certificate->photo)
-                <div class="flex justify-center">
-                    <img src="{{ url('storage/' . $certificate->photo) }}"
-                         alt="{{ $certificate->title }}"
-                         class="w-52 h-52 object-cover rounded-xl shadow-md ring-4 ring-indigo-100">
-                </div>
-            @else
-                <div class="text-center text-gray-400 italic">
-                    No photo uploaded
-                </div>
-            @endif
+    <div class="flex justify-center items-center min-h-screen bg-gray-100 py-10">
+        <div class="document-card relative w-[1100px] h-[750px] shadow-2xl overflow-hidden border-8 border-gray-100 rounded-2xl bg-white">
 
-            {{-- Info section --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- ✅ Background image -->
+            <img src="{{ asset('img/bg.png') }}"
+                 style="position: absolute; inset: 0; width: 100%; height: 100%;
+                        object-fit: cover; z-index: 0; border-radius: 0; margin: 0;">
+
+            <!-- ✅ Overlay to fix edge bleed -->
+            <div style="position:absolute; inset:0; background:white; opacity:0.03; z-index:1;"></div>
+
+            <!-- ✅ Content -->
+            <div class="relative z-10 flex flex-col justify-between h-full px-16 py-10 text-center">
+
+                <!-- Header -->
                 <div>
-                    <p class="text-sm text-gray-500 uppercase tracking-wide">Name</p>
-                    <p class="text-lg font-semibold text-gray-900">{{ $certificate->name }}</p>
-                </div>
-
-                <div>
-                    <p class="text-sm text-gray-500 uppercase tracking-wide">Role</p>
-                    <p class="text-lg font-medium text-gray-800">{{ $certificate->role->name }}</p>
-                </div>
-
-                @if (!empty($certificate->category))
-                    <div>
-                        <p class="text-sm text-gray-500 uppercase tracking-wide">Category</p>
-                        <p class="text-lg font-medium text-gray-800">{{ $certificate->category->name }}</p>
-                    </div>
-                @endif
-
-                <div>
-                    <p class="text-sm text-gray-500 uppercase tracking-wide">Created At</p>
-                    <p class="text-lg font-medium text-gray-800">
-                        {{ $certificate->created_at->format('Y-m-d H:i') }}
+                    <h2 class="text-lg font-semibold text-gray-700 tracking-widest uppercase">
+                        Certificate of Achievement
+                    </h2>
+                    <p class="text-sm text-gray-500 font-medium mt-1 tracking-wide uppercase">
+                        Proudly Presented To
                     </p>
                 </div>
-            </div>
 
-            {{-- Description --}}
-            <div>
-                <p class="text-sm text-gray-500 uppercase tracking-wide">About Role</p>
-                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 text-gray-700 leading-relaxed">
-                    {{ $certificate->description }}
-                </div>
-            </div>
-
-            {{-- Status --}}
-            @if (isset($certificate->status))
+                <!-- Name -->
                 <div>
-                    <p class="text-sm text-gray-500 uppercase tracking-wide mb-1">Status</p>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
-                        {{ $certificate->status ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600' }}">
-                        <span class="w-2 h-2 mr-2 rounded-full {{ $certificate->status ? 'bg-green-500' : 'bg-gray-400' }}"></span>
-                        {{ $certificate->status ? 'Active' : 'Inactive' }}
-                    </span>
+                    <h1 class="text-5xl font-extrabold text-blue-900 mt-3 tracking-wide uppercase">
+                        {{ strtoupper($certificate->name) }}
+                    </h1>
+                    <div class="w-64 mx-auto border-t-2 border-gray-400 my-2"></div>
+                    <p class="text-gray-700 mt-2">
+                        for achieving the most success in the last month
+                    </p>
+
+                    <h2 class="text-2xl font-bold text-red-700 mt-4 uppercase tracking-widest">
+                        {{ strtoupper($certificate->category->name) }}
+                    </h2>
                 </div>
-            @endif
 
-            {{-- Public Link --}}
-            <div>
-                <p class="text-sm text-gray-500 uppercase tracking-wide mb-1">Public Link</p>
-                <a href="{{ route('certificate.view', $certificate->link) }}"
-                   class="text-blue-600 hover:text-blue-800 font-medium break-all">
-                    {{ route('certificate.view', $certificate->link) }}
-                </a>
-            </div>
+                <!-- Issue date -->
+                <div class="flex justify-center items-center gap-2 mt-6 text-gray-700 text-base">
+                    <span class="font-semibold">Issued on:</span>
+                    @php
+                        $date = DateTime::createFromFormat('Y-m-d', $certificate->reg_date);
+                    @endphp
+                    <span class="border-b border-gray-500 px-2">{{ $date->format('d') }}</span> /
+                    <span class="border-b border-gray-500 px-4">{{ $date->format('F') }}</span> /
+                    <span class="border-b border-gray-500 px-2">{{ $date->format('Y') }}</span>
+                </div>
 
-            <div id="qr-code-text" class="qr-code-div mx-auto w-64">
-                <?php
-                $url = route('certificate.view', $certificate->link);
-                $guid_is_ready = isset($certificate->link) ? true : false;
-                if($guid_is_ready) {
-                    $qrCodeText = $url;
-                } else {
-                    $qrCodeText = $url;
-                }
+                <!-- Footer -->
+                <div class="relative top-[50px]">
+                    <div class="flex justify-between items-center">
 
-                ob_start();
-                $_GET['s'] = 'qr';
-                $_GET['d'] = $qrCodeText;
-                $_GET['sf'] = 3;
-                $_GET['ms'] = 'r';
-                $_GET['md'] = 1;
-                $_GET['wq'] = 0;
+                        <!-- Rector -->
+                        <div class="text-left ml-4">
+                            <p class="font-semibold text-lg">R. MAMAJONOV</p>
+                            <p class="font-semibold text-sm text-gray-700">Rector of Japan Digital University</p>
+                        </div>
 
-                include public_path('SystemQRCode.php');
-                $generator = new \App\Models\SystemQRCode($url);
-                $generator->output_image();
-                $data = ob_get_clean();
-                $base64 = 'data:image/png;base64,' . base64_encode($data);
+                        <!-- Logo -->
+                        <div class="flex flex-col items-center">
+                            <img src="{{ asset('img/JDU-logo.png') }}" alt="JDU Logo" class="w-44 h-auto">
+                            <div class="text-xs text-gray-600">Japan Digital University</div>
+                        </div>
 
-                // echo $file3;
-                ?>
-                <img src="<?=$base64?>" class="qr-code-image" />
+                        <!-- Seal -->
+                        <div class="mr-6 flex justify-end">
+                            <img src="{{ asset('img/pechat.png') }}" alt="Seal" class="w-70 h-auto object-contain">
+                        </div>
+                    </div>
+
+                    <!-- QR code -->
+                    <div class="flex justify-center relative right-14">
+                        <?php
+                        $url = route('certificate.view', $certificate->link);
+                        ob_start();
+                        include public_path('SystemQRCode.php');
+                        $generator = new \App\Models\SystemQRCode($url);
+                        $generator->output_image();
+                        $data = ob_get_clean();
+                        $base64 = 'data:image/png;base64,' . base64_encode($data);
+                        ?>
+                        <div class="w-28 h-28 flex justify-center items-center shadow-inner">
+                            <img src="{{ $base64 }}" alt="QR Code" class="w-20 h-20 rounded-md">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `certificates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `certificates` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `role_id` smallint DEFAULT NULL,
   `category_id` smallint DEFAULT NULL,
@@ -87,6 +87,8 @@ CREATE TABLE `certificates` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `status` smallint DEFAULT 1,
   `description` varchar(2048) DEFAULT NULL,
+  `reg_date` date DEFAULT NULL,
+  `file` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -14,6 +14,8 @@ class Certificate extends Model{
         'link',
         'photo',
         'status',
+        'reg_date',
+        'file',
     ];
 
         public function role() {

@@ -28,19 +28,23 @@ class CertificateController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'id' => 'required|integer',
             'role_id' => 'required|integer',
             'category_id' => 'required|integer',
+            'reg_date'=>'required',
             'description' => 'required|string|max:2048',
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
         if ($request->hasFile('photo')) {
             $validated['photo'] = $request->file('photo')->store('certificates', 'public');
         }
+        if ($request->hasFile('file')) {
+            $validated['file'] = $request->file('file')->store('certificates-file', 'public');
+        }
 
-        $unique = $validated['id'].'_'.time();
-        $validated['link'] = sha1($unique);
+        $unique = microtime();
+        $validated['link'] = base64_encode($unique);
         Certificate::create($validated);
         return redirect()->route('certificate.index')->with('success', 'Certificate added successfully!');
     }
@@ -54,11 +58,12 @@ class CertificateController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'id' => 'required|integer',
             'role_id' => 'required|integer',
             'category_id' => 'required|integer',
+            'reg_date'=>'required',
             'description' => 'required|string|max:2048',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
             'status'=>'nullable|integer',
         ]);
         if ($request->hasFile('photo')) {
@@ -67,7 +72,12 @@ class CertificateController extends Controller
         } else {
             $validated['photo'] = $certificate->photo;
         }
-
+        if ($request->hasFile('file')) {
+            $validated['file'] = $request->file('file')->store('certificates-file', 'public');
+            unlink(storage_path('app/public/'.$certificate->file));
+        } else {
+            $validated['photo'] = $certificate->file;
+        }
         $certificate->update($validated);
         return redirect()->route('certificate.index')->with('success', 'Certificate updated successfully!');
     }

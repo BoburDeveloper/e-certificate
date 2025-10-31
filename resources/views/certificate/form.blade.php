@@ -40,14 +40,6 @@
                            class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 shadow-sm">
                 </div>
 
-                {{-- ID Number --}}
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">ID Number</label>
-                    <input type="text" name="id" required
-                           value="{{ old('id', $certificate->id ?? '') }}"
-                           class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 shadow-sm">
-                </div>
-
                 {{-- Role --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Role</label>
@@ -68,6 +60,22 @@
                             Student of the Month
                         </option>
                     </select>
+                </div>
+
+                <div>
+                    <label for="reg_date" class="block text-sm font-medium text-gray-700 mb-1">
+                        Registration Date
+                    </label>
+                    <input
+                        type="date"
+                        name="reg_date"
+                        id="reg_date"
+                        value="{{ old('reg_date', $certificate->reg_date ?? '') }}"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700
+               focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400
+               transition duration-200 ease-in-out bg-gray-50"
+                        required
+                    >
                 </div>
 
                 {{-- Description --}}
@@ -100,6 +108,16 @@
                     <input name="photo" type="file"
                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 transition-all">
                     <p class="text-xs text-gray-500 mt-1">Accepted formats: JPG, PNG. Max 2MB.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Certificate</label>
+                    @if(isset($certificate->file))
+                        <a href="{{ url('storage/'.$certificate->file) }}">File</a>
+                    @endif
+                    <input name="file" type="file"
+                           class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 transition-all">
+                    <p class="text-xs text-gray-500 mt-1">Accepted formats: PDF, JPG, PNG. Max 2MB.</p>
                 </div>
 
                 {{-- Buttons --}}
