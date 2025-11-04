@@ -9,8 +9,7 @@
 
             <!-- ✅ Background image -->
             <img src="{{ asset('img/bg.png') }}"
-                 style="position: absolute; inset: 0; width: 100%; height: 100%;
-                        object-fit: cover; z-index: 0; border-radius: 0; margin: 0;">
+                 class="bg-img">
 
             <!-- ✅ Overlay to fix edge bleed -->
             <div style="position:absolute; inset:0; background:white; opacity:0.03; z-index:1;"></div>
@@ -29,16 +28,19 @@
                 </div>
 
                 <!-- Name -->
-                <div>
-                    <h1 class="text-5xl font-extrabold text-blue-900 mt-3 tracking-wide uppercase">
+                <!-- Name -->
+                <div class="text-center">
+                    <h1 class="text-5xl font-extrabold text-blue-900 mt-3 tracking-wide uppercase drop-shadow-md">
                         {{ strtoupper($certificate->name) }}
                     </h1>
-                    <div class="w-64 mx-auto border-t-2 border-gray-400 my-2"></div>
-                    <p class="text-gray-700 mt-2">
-                        for achieving the most success in the last month
-                    </p>
 
-                    <h2 class="text-2xl font-bold text-red-700 mt-4 uppercase tracking-widest">
+{{--                    <div class="w-64 mx-auto border-t-2 border-gray-400 my-2"></div>--}}
+
+                    <div class="text-gray-700 mx-auto mt-6 text-lg italic drop-shadow-sm w-90-percent jp-text">
+                        {!! $certificate->description !!}
+                    </div>
+
+                    <h2 class="text-5xl font-bold text-red-700 mt-14 uppercase tracking-widest drop-shadow-lg">
                         {{ strtoupper($certificate->category->name) }}
                     </h2>
                 </div>
@@ -55,19 +57,19 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="relative top-[50px]">
+                <div class="relative top-[0px]">
                     <div class="flex justify-between items-center">
 
-                        <!-- Rector -->
-                        <div class="text-left ml-4">
-                            <p class="font-semibold text-lg">R. MAMAJONOV</p>
-                            <p class="font-semibold text-sm text-gray-700">Rector of Japan Digital University</p>
+                        <!-- Logo -->
+                        <div class="flex flex-col items-center ml-6">
+                            <img src="{{ asset('img/JDU-logo1.png') }}" alt="JDU Logo" class="w-44 h-auto">
                         </div>
 
-                        <!-- Logo -->
-                        <div class="flex flex-col items-center">
-                            <img src="{{ asset('img/JDU-logo.png') }}" alt="JDU Logo" class="w-44 h-auto">
-                            <div class="text-xs text-gray-600">Japan Digital University</div>
+
+                        <!-- Rector -->
+                        <div class="text-left ml-8 rector">
+                            <p class="font-semibold text-lg">R. MAMAJONOV</p>
+                            <p class="font-semibold text-sm text-gray-700">Rector of Japan Digital University</p>
                         </div>
 
                         <!-- Seal -->
@@ -77,7 +79,7 @@
                     </div>
 
                     <!-- QR code -->
-                    <div class="flex justify-center relative right-14">
+                    <div class="flex justify-center relative bottom-16 right-8 qr-code-text">
                         <?php
                         $url = route('certificate.view', $certificate->link);
                         ob_start();
@@ -87,7 +89,7 @@
                         $data = ob_get_clean();
                         $base64 = 'data:image/png;base64,' . base64_encode($data);
                         ?>
-                        <div class="w-28 h-28 flex justify-center items-center shadow-inner">
+                        <div class="w-28 h-28 flex justify-center items-center">
                             <img src="{{ $base64 }}" alt="QR Code" class="w-20 h-20 rounded-md">
                         </div>
                     </div>

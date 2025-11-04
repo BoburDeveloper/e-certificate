@@ -40,6 +40,13 @@
                            class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 shadow-sm">
                 </div>
 
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">JDU ID</label>
+                    <input type="text" name="jdu_id" required
+                           value="{{ old('name', $certificate->jdu_id ?? '') }}"
+                           class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 shadow-sm">
+                </div>
+
                 {{-- Role --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Role</label>

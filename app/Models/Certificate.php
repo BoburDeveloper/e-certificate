@@ -16,6 +16,7 @@ class Certificate extends Model{
         'status',
         'reg_date',
         'file',
+        'jdu_id',
     ];
 
         public function role() {

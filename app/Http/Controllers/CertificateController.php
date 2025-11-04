@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Vinkla\Hashids\Facades\Hashids;
+
 
 class CertificateController extends Controller
 {
@@ -28,12 +30,13 @@ class CertificateController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'jdu_id' => 'required|integer',
             'role_id' => 'required|integer',
             'category_id' => 'required|integer',
             'reg_date'=>'required',
             'description' => 'required|string|max:2048',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -43,9 +46,19 @@ class CertificateController extends Controller
             $validated['file'] = $request->file('file')->store('certificates-file', 'public');
         }
 
-        $unique = microtime();
-        $validated['link'] = base64_encode($unique);
-        Certificate::create($validated);
+        $certificate = new Certificate($validated);
+        $certificate->save();
+
+        $hash = mb_substr(sha1($certificate->jdu_id), 0,8);
+        if($certificate->link != $hash) {
+            $certificate->link = $hash;
+        } else {
+            $hash = mb_substr(sha1($certificate->jdu_id), 0,8);
+            $certificate->link = $hash;
+        }
+
+        $certificate->save();
+
         return redirect()->route('certificate.index')->with('success', 'Certificate added successfully!');
     }
 
@@ -58,6 +71,7 @@ class CertificateController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'jdu_id' => 'required|integer',
             'role_id' => 'required|integer',
             'category_id' => 'required|integer',
             'reg_date'=>'required',
@@ -79,13 +93,15 @@ class CertificateController extends Controller
             $validated['photo'] = $certificate->file;
         }
         $certificate->update($validated);
+
         return redirect()->route('certificate.index')->with('success', 'Certificate updated successfully!');
     }
 
     public function destroy(Certificate $certificate)
     {
 
-        unlink(storage_path('app/public/'.$certificate->photo));
+        @unlink(storage_path('app/public/'.$certificate->photo));
+        @unlink(storage_path('app/public/'.$certificate->file));
         $certificate->delete();
         return redirect()->route('certificate.index')->with('success', 'Certificate deleted successfully!');
     }

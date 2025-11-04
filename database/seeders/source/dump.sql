@@ -79,6 +79,7 @@ DROP TABLE IF EXISTS `certificates`;
 CREATE TABLE `certificates` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
+  `jdu_id` int DEFAULT NULL,
   `role_id` smallint DEFAULT NULL,
   `category_id` smallint DEFAULT NULL,
   `link` varchar(200) DEFAULT NULL,
