@@ -53,7 +53,10 @@ class CertificateController extends Controller
         if($certificate->link != $hash) {
             $certificate->link = $hash;
         } else {
-            $hash = mb_substr(sha1($certificate->jdu_id), 0,9);
+            $hash = mb_substr(sha1($certificate->jdu_id.'_'.$certificate->id), 0,9);
+             if($certificate->link == $hash) {
+                die('Unique link problem');
+            }   
             $certificate->link = $hash;
         }
 
