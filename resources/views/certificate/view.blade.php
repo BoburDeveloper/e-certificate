@@ -1,8 +1,8 @@
 <x-layout title="Certificate of Achievement">
-    <button type="button" onclick="printDiv('document-card')"
-            class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
-        PDF
-    </button>
+    <!--<button type="button" onclick="printDiv('document-card')"-->
+    <!--        class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">-->
+    <!--    PRINT-->
+    <!--</button>-->
 
     <div class="flex justify-center items-center min-h-screen bg-gray-100 py-10">
         <div class="document-card relative w-[1100px] h-[750px] shadow-2xl overflow-hidden border-8 border-gray-100 rounded-2xl bg-white">

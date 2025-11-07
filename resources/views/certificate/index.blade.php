@@ -20,6 +20,7 @@
                 <th class="py-3 px-4">Name</th>
                 <th class="py-3 px-4">Role</th>
                 <th class="py-3 px-4">Category</th>
+                <th class="py-3 px-4">Reg. date</th>
                 <th class="py-3 px-4">Photo</th>
                 <th class="py-3 px-4 text-center">Actions</th>
             </tr>
@@ -43,6 +44,11 @@
 
                     <td class="py-3 px-4">
                         <span class="text-gray-700">{{ $certificate->category->name }}</span>
+                    </td>
+
+
+                    <td class="py-3 px-4">
+                        <span class="text-gray-700">{{ $certificate->reg_date }}</span>
                     </td>
 
                     <td class="py-3 px-4">

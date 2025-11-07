@@ -62,4 +62,8 @@
         margin-right: 20px;
         white-space: nowrap;
     }
+    .w-90-percent{
+        width: 86%;
+        text-align: center;
+    }
 }

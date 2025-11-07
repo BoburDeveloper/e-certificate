@@ -49,11 +49,11 @@ class CertificateController extends Controller
         $certificate = new Certificate($validated);
         $certificate->save();
 
-        $hash = mb_substr(sha1($certificate->jdu_id), 0,8);
+        $hash = mb_substr(sha1($certificate->jdu_id), 0,9);
         if($certificate->link != $hash) {
             $certificate->link = $hash;
         } else {
-            $hash = mb_substr(sha1($certificate->jdu_id), 0,8);
+            $hash = mb_substr(sha1($certificate->jdu_id), 0,9);
             $certificate->link = $hash;
         }
 
