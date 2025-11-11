@@ -1,3 +1,6 @@
+@php
+use App\Models\Role;
+@endphp
 <x-layout title="{{ $form_type == 'update' ? 'Edit Certificate' : 'Create Certificate' }}">
     <div class="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden mt-10 border border-gray-100">
         {{-- Header --}}
@@ -53,8 +56,13 @@
                     <select name="role_id" required
                             class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 shadow-sm bg-white">
                         <option value="">-- Select Role --</option>
-                        <option value="1" {{ old('role_id', $certificate->role_id ?? '') == 1 ? 'selected' : '' }}>Talaba</option>
-                        <option value="2" {{ old('role_id', $certificate->role_id ?? '') == 2 ? 'selected' : '' }}>O'qituvchi</option>
+                        @php
+                            $roles = Role::where('status', '>', 0)->get()->toArray();
+                            var_dump($roles);
+                        @endphp
+                        @foreach($roles as $key => $value)
+                        <option value="{{$value['id']}}" {{ old('role_id', $certificate->role_id ?? '') == $value['id'] ? 'selected' : '' }}>{{$value['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
 
