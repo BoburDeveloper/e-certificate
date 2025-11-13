@@ -52,11 +52,16 @@
                     </td>
 
                     <td class="py-3 px-4">
-                        <img src="{{ url('storage/' . $certificate->photo) }}"
+                        <img src="{{ url('storage/' . $certificate->photo) }}" alt="No image"
                              class="w-16 h-16 object-cover rounded-lg border border-gray-200 shadow-sm" />
                     </td>
 
                     <td class="py-3 px-4 text-center space-x-2">
+                        <a href="{{ route('certificate.view', $certificate->link) }}"
+                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg shadow text-sm transition">
+                            Public link
+                        </a>
+
                         <a href="{{ route('certificate.edit', $certificate) }}"
                            class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1.5 rounded-lg shadow text-sm transition">
                             Edit

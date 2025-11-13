@@ -56,7 +56,7 @@ class CertificateController extends Controller
             $hash = mb_substr(sha1($certificate->jdu_id.'_'.$certificate->id), 0,9);
              if($certificate->link == $hash) {
                 die('Unique link problem');
-            }   
+            }
             $certificate->link = $hash;
         }
 
@@ -85,13 +85,13 @@ class CertificateController extends Controller
         ]);
         if ($request->hasFile('photo')) {
             $validated['photo'] = $request->file('photo')->store('certificates', 'public');
-            unlink(storage_path('app/public/'.$certificate->photo));
+            @unlink(storage_path('app/public/'.$certificate->photo));
         } else {
             $validated['photo'] = $certificate->photo;
         }
         if ($request->hasFile('file')) {
             $validated['file'] = $request->file('file')->store('certificates-file', 'public');
-            unlink(storage_path('app/public/'.$certificate->file));
+            @unlink(storage_path('app/public/'.$certificate->file));
         } else {
             $validated['photo'] = $certificate->file;
         }
