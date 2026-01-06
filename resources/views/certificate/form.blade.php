@@ -1,7 +1,7 @@
 @php
 use App\Models\Role;
+use App\Models\Category;
 @endphp
-<x-layout title="{{ $form_type == 'update' ? 'Edit Certificate' : 'Create Certificate' }}">
     <div class="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden mt-10 border border-gray-100">
         {{-- Header --}}
         <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-4">
@@ -58,7 +58,6 @@ use App\Models\Role;
                         <option value="">-- Select Role --</option>
                         @php
                             $roles = Role::where('status', '>', 0)->get()->toArray();
-                            var_dump($roles);
                         @endphp
                         @foreach($roles as $key => $value)
                         <option value="{{$value['id']}}" {{ old('role_id', $certificate->role_id ?? '') == $value['id'] ? 'selected' : '' }}>{{$value['name']}}</option>
@@ -71,9 +70,14 @@ use App\Models\Role;
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Category</label>
                     <select name="category_id" required
                             class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 shadow-sm bg-white">
-                        <option value="1" {{ old('category_id', $certificate->category_id ?? '') == 1 ? 'selected' : '' }}>
-                            Student of the Month
+                        @php
+                            $categories = Category::where('status', '>', 0)->get()->toArray();
+                        @endphp
+                        @foreach($categories as $key => $value)
+                        <option value="{{$value['id']}}" {{ old('category_id', $certificate->category_id ?? '') == $value['id'] ? 'selected' : '' }}>
+                            {{$value['name']}}
                         </option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -149,4 +153,3 @@ use App\Models\Role;
             </form>
         </div>
     </div>
-</x-layout>

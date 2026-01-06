@@ -66,7 +66,7 @@
                            class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1.5 rounded-lg shadow text-sm transition">
                             Edit
                         </a>
-
+                        @if(auth()->user()->role=='admin')
                         <form action="{{ route('certificate.destroy', $certificate) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
@@ -76,6 +76,7 @@
                                 Delete
                             </button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @empty

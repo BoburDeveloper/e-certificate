@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class CertificateController extends Controller
 {
-
+    use AuthorizesRequests;
+    
     public function __construct()
     {
 
@@ -46,19 +50,25 @@ class CertificateController extends Controller
             $validated['file'] = $request->file('file')->store('certificates-file', 'public');
         }
 
+        $validated['user_id'] = Auth::user()->id;
+
+        $hash = mb_substr(sha1($validated['reg_date'].'_'. $validated['jdu_id']), 0,9);
+
+        $validated['link'] = $hash;
+
+
         $certificate = new Certificate($validated);
         $certificate->save();
 
-        $hash = mb_substr(sha1($certificate->jdu_id), 0,9);
-        if($certificate->link != $hash) {
-            $certificate->link = $hash;
-        } else {
-            $hash = mb_substr(sha1($certificate->jdu_id.'_'.$certificate->id), 0,9);
+        if($certificate->link == $hash) {
+            $hash = mb_substr(sha1($certificate->reg_date.'_'.$certificate->jdu_id.'_'.$certificate->id), 0,9);
              if($certificate->link == $hash) {
                 die('Unique link problem');
             }
-            $certificate->link = $hash;
+
         }
+
+        $certificate->link = $hash;
 
         $certificate->save();
 
@@ -67,6 +77,7 @@ class CertificateController extends Controller
 
     public function edit(Certificate $certificate)
     {
+        Gate::authorize('edit-certificate', $certificate);
         return view('certificate.edit', compact('certificate'));
     }
 

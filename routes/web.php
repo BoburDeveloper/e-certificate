@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CertificateController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return redirect('/certificate');
+})->middleware('auth');
+
+
 Route::get('view/{link}', [CertificateController::class, 'view'])
     ->name('certificate.view');
 

@@ -12,6 +12,12 @@
 </head>
 <body class="bg-gray-50 text-gray-900">
     <div class="container mx-auto">
+        @auth
+        <form action="/logout" method="post" class="mb-4">
+            @csrf
+            <button type="submit" href="{{route('logout')}}" class="inline-block bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg shadow text-sm transition">Sign Out</button>            
+        </form>
+        @endauth
         {{ $slot }}
     </div>
 

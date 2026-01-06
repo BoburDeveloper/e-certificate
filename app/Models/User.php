@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
+    }
 }

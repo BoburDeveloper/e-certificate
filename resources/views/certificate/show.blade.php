@@ -1,3 +1,11 @@
+@php
+    $d_length = strlen($certificate->description);
+    $ci_mt = 14;
+    if($d_length>610) {
+        $ci_mt = 4;
+    }
+@endphp
+
 <x-layout title="Certificate of Achievement">
     <button type="button" onclick="printDiv('document-card')"
             class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
@@ -40,7 +48,7 @@
                         {!! $certificate->description !!}
                     </div>
 
-                    <h2 class="text-5xl font-bold text-red-700 mt-14 uppercase tracking-widest drop-shadow-lg">
+                    <h2 class="text-5xl font-bold text-red-700 mt-{{$ci_mt}} uppercase tracking-widest drop-shadow-lg">
                         {{ strtoupper($certificate->category->name) }}
                     </h2>
                 </div>
