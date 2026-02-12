@@ -31,6 +31,9 @@
 .ml-9{
     margin-left: 180px;
 }
+.footer{
+    padding-left: 100px;
+}
 @media print {
     * {
         transform: none !important;
@@ -65,5 +68,38 @@
     .w-90-percent{
         width: 86%;
         text-align: center;
+    }
+    .cert-name{
+        margin-top: 30px;
+    }
+    .cert-description{
+        margin-bottom: 15px;
+    }
+    .cert-content{
+        padding-left: 210px;
+    }
+    .cer-qr-code{
+        right: 80px;
+    }
+    .cert-texts{
+        padding-left: 40px;
+    }
+    .texts1{
+        margin-top: 0;
+    }
+    .texts01{
+        margin-top: 15px;
+    }
+    .rector1{
+        right: 40px;
+    }
+    .cer-qr-code2{
+        right: 40px;
+    }
+    .logo2{
+        right: 60px;
+    }
+    .verified2{
+        right: 40px;
     }
 }
