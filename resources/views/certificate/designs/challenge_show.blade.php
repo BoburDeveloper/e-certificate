@@ -52,7 +52,12 @@
 
                     <p class="text-base max-w-xl mx-auto text-gray-100 cert-description">
                         {!! $certificate->description !!}
-                        on {{date('d.m.Y', strtotime($certificate->reg_date))}}
+
+                        @php
+                            $date = DateTime::createFromFormat('Y-m-d', $certificate->reg_date);
+                        @endphp
+                        <br/>
+                        on {{ $date->format('F') }} {{$date->format('d') }}, {{ $date->format('Y') }}.
                     </p>
 
                 </div>
@@ -61,12 +66,16 @@
 
 
                 <!-- FOOTER -->
-                <div class="flex justify-between items-end relative left-[30px]">
+                <div class="flex justify-between items-end bottom02 relative left-[0px]">
+
+                    <!-- CENTER LOGO -->
+                    <img src="{{ asset('img/logo2.png') }}"
+                         class="w-44 h-auto opacity-95 relative right-0 logo02">
 
                     <!-- LEFT -->
                     <div class="text-center">
 
-                        <div class="relative top-[20px]">
+                        <div class="relative top-[20px] left-[40px]">
                             <p class="font-semibold text-base">
                                 R. Mamajonov
                             </p>
@@ -87,19 +96,14 @@
                         @endphp
 
                         <img src="{{ $base64 }}"
-                             class="w-24 h-24 rounded shadow-lg border-2 border-white top-[40px] right-[100px] cer-qr-code relative">
+                             class="w-24 h-24 rounded shadow-lg border-2 border-white top-[40px] left-[37px] cer-qr-code relative">
 
                     </div>
 
 
-                    <!-- CENTER LOGO -->
-                    <img src="{{ asset('img/logo2.png') }}"
-                         class="w-44 h-auto opacity-95 ml-6">
-
-
                     <!-- SEAL -->
                     <img src="{{ asset('img/pechat.png') }}"
-                         class="w-70 object-contain ml-6 relative top-[20px]">
+                         class="w-70 object-contain ml-6 relative top-[20px] left-[50px] ml-7 pechat02">
 
                 </div>
 

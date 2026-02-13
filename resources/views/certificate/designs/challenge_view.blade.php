@@ -1,9 +1,9 @@
 <x-layout title="IT Challenge Certificate">
 
-    <button onclick="printDiv('document-card')"
-            class="absolute top-6 right-6 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
-        PDF
-    </button>
+{{--    <button onclick="printDiv('document-card')"--}}
+{{--            class="absolute top-6 right-6 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">--}}
+{{--        PDF--}}
+{{--    </button>--}}
 
     <div class="w-full min-h-screen flex items-center justify-center bg-gray-200">
 
@@ -52,7 +52,12 @@
 
                         <p class="text-base max-w-xl mx-auto text-gray-100 cert-description">
                             {!! $certificate->description !!}
-                            on {{date('d.m.Y', strtotime($certificate->reg_date))}}
+                            @php
+                                $date = DateTime::createFromFormat('Y-m-d', $certificate->reg_date);
+                            @endphp
+                            <br/>
+                            on {{ $date->format('F') }} {{$date->format('d') }}, {{ $date->format('Y') }}.
+                        </p>
                         </p>
 
                     </div>
@@ -61,12 +66,16 @@
 
 
                 <!-- FOOTER -->
-                <div class="flex justify-between items-end relative left-[30px] mt-4">
+                <div class="flex justify-between items-end relative bottom-cert left-[30px] mt-4">
 
                     <!-- LEFT -->
+                    <img src="{{ asset('img/logo2.png') }}"
+                         class="w-44 h-auto opacity-95 relative right-[70px] logo2">
+
+{{--                    center--}}
                     <div class="text-center">
 
-                        <div class="relative top-[20px] right-[80px] rector1">
+                        <div class="relative bottom-20 right-[50px] rector1">
                             <p class="font-semibold text-base">
                                 R. Mamajonov
                             </p>
@@ -76,30 +85,14 @@
                             </p>
                         </div>
 
-                        @php
-                            $url = route('certificate.view', $certificate->link);
-                            ob_start();
-                            include public_path('SystemQRCode.php');
-                            $generator = new \App\Models\SystemQRCode($url);
-                            $generator->output_image();
-                            $data = ob_get_clean();
-                            $base64 = 'data:image/png;base64,' . base64_encode($data);
-                        @endphp
-
-                        <img src="{{ $base64 }}"
-                             class="w-24 h-24 rounded shadow-lg border-2 border-white top-[40px] right-[110px] cer-qr-code2 relative">
-
                     </div>
 
 
-                    <!-- CENTER LOGO -->
-                    <img src="{{ asset('img/logo2.png') }}"
-                         class="w-44 h-auto opacity-95 relative right-[70px] logo2">
 
 
                     <!-- SEAL -->
-                    <div class="flex justify-end relative right-[0px] top-2 verified2">
-                        <img src="{{ asset('img/verified.png') }}" alt="Seal" class="w-40 h-auto object-contain">
+                    <div class="flex justify-end relative right-[0px] top-0 verified2">
+                        <img src="{{ asset('img/verified.png') }}" alt="Seal" class="w-44 h-auto object-contain">
                     </div>
 
                 </div>
