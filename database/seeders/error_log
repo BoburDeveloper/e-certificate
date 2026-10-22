@@ -1,0 +1,12 @@
+[03-Apr-2026 17:33:03 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Seeder" not found in /home/jduuz/certificate.jdu.uz/database/seeders/DatabaseSeeder.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/database/seeders/DatabaseSeeder.php on line 8
+[03-Apr-2026 18:57:20 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Seeder" not found in /home/jduuz/certificate.jdu.uz/database/seeders/DatabaseSeeder.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/database/seeders/DatabaseSeeder.php on line 8
+[06-Apr-2026 16:30:50 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Seeder" not found in /home/jduuz/certificate.jdu.uz/database/seeders/DatabaseSeeder.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/database/seeders/DatabaseSeeder.php on line 8

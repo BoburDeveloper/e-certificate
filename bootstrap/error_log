@@ -1,0 +1,8 @@
+[03-Apr-2026 18:56:44 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/jduuz/certificate.jdu.uz/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/bootstrap/app.php on line 7
+[14-Jul-2026 18:53:51 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/jduuz/certificate.jdu.uz/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/bootstrap/app.php on line 7

@@ -1,0 +1,8 @@
+[02-Apr-2026 18:50:38 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/jduuz/certificate.jdu.uz/routes/web.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/routes/web.php on line 7
+[06-Apr-2026 16:30:46 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/jduuz/certificate.jdu.uz/routes/web.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/routes/web.php on line 7

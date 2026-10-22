@@ -1,0 +1,8 @@
+[06-Apr-2026 16:30:47 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Auth\User" not found in /home/jduuz/certificate.jdu.uz/app/Models/User.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/app/Models/User.php on line 10
+[06-Apr-2026 16:30:48 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Model" not found in /home/jduuz/certificate.jdu.uz/app/Models/Certificate.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/app/Models/Certificate.php on line 6

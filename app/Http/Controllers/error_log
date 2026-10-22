@@ -1,0 +1,8 @@
+[03-Apr-2026 18:57:20 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/jduuz/certificate.jdu.uz/app/Http/Controllers/CertificateController.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/app/Http/Controllers/CertificateController.php on line 13
+[06-Apr-2026 16:30:49 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/jduuz/certificate.jdu.uz/app/Http/Controllers/CertificateController.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/app/Http/Controllers/CertificateController.php on line 13

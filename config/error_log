@@ -1,0 +1,24 @@
+[03-Apr-2026 18:56:42 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/jduuz/certificate.jdu.uz/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/config/app.php on line 16
+[07-Jul-2026 23:42:23 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/jduuz/certificate.jdu.uz/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/config/database.php on line 19
+[14-Jul-2026 13:17:26 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/jduuz/certificate.jdu.uz/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/config/database.php on line 19
+[14-Jul-2026 18:53:20 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/jduuz/certificate.jdu.uz/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/config/database.php on line 19
+[14-Jul-2026 18:53:51 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/jduuz/certificate.jdu.uz/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/config/database.php on line 19
+[14-Jul-2026 18:54:30 Asia/Tashkent] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/jduuz/certificate.jdu.uz/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/jduuz/certificate.jdu.uz/config/database.php on line 19
